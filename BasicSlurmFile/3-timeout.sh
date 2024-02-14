@@ -1,6 +1,7 @@
 #!/bin/bash
-#SBATCH --qos arc
-#SBATCH --account edmondac-rsg
+#SBATCH --reservation vjgo8416-training24
+#SBATCH --qos turing
+#SBATCH --account vjgo8416-training24
 #SBATCH --time 0:0:1
 
 module purge
