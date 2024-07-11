@@ -626,6 +626,7 @@ James Allsopp and the Baskerville Team
 <li><strong>SLURM_ARRAY_TASK_ID</strong> - Index of the job in the array, e.g.&nbsp;a value between 1 and 10 from above.</li>
 </ul>
 <p>To track these jobs use the <strong>sacct -j &lt;Job id&gt;</strong> command, or the squeue command.</p>
+<p>See <strong>2-arrayJobConfig.sh </strong> for information on loading a different config in each array job.</p>
 </section>
 <section id="two-questions-about-slurm-arrays" class="slide level2">
 <h2>Two questions about Slurm Arrays</h2>
@@ -663,8 +664,8 @@ James Allsopp and the Baskerville Team
 <p>Documented in more detail in the <a href="docs.baskerville.ac.uk" class="external" target="_blank">docs.baskerville.ac.uk</a></p>
 <ul>
 <li>Leave <strong>--cpus-per-gpu=36</strong> . Resources such as CPUs and Memory are allocated per GPU.</li>
-<li>Adding more than 4 GPUs on a single node will fail.</li>
 <li>All Compute nodes have 4 GPUs.</li>
+<li>So adding more than 4 GPUs on a single node will fail.</li>
 </ul>
 <p>See <strong>6-MoreResources</strong> to show loading PyTorch and difference between selecting 1 and more GPUs.</p>
 <p>If you want to find out when a job will start (worst case) use <strong>squeue -j=<job id=""> –start</job></strong></p>
