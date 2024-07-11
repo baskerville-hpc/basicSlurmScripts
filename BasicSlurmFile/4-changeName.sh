@@ -1,7 +1,6 @@
 #!/bin/bash
-#SBATCH --reservation vjgo8416-training24
-#SBATCH --qos turing
-#SBATCH --account vjgo8416-training24
+#SBATCH --qos FIX_THIS
+#SBATCH --account FIX_THIS
 #SBATCH --time 1:0:0
 #SBATCH --job-name "Amorereadablename"
 
