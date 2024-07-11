@@ -13,4 +13,4 @@ echo "SLURM_JOB_ID is ${SLURM_JOB_ID}"
 echo "SLURM_ARRAY_JOB_ID is ${SLURM_ARRAY_JOB_ID}"
 echo "SLURM_ARRAY_TASK_ID is ${SLURM_ARRAY_TASK_ID}"
 
-sleep 10
+sleep 4

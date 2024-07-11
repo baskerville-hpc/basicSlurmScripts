@@ -1,15 +1,12 @@
-1 config_1
-2 config_2
-3 config_3
-4 config_4
-5 config_5
-6 config_6
-7 config_7
-8 config_8
-9 config_9
-10 config_10
-11 config_11
-12 config_12
-13 config_13
-14 config_14
-15 config_15
+# Note SLURM_ARRAY_TASK_ID is not zero-indexed
+1 config_files/config_1
+2 config_files/config_2
+3 config_files/config_3
+4 config_files/config_4
+5 config_files/config_5
+6 config_files/config_6
+7 config_files/config_7
+8 config_files/config_8
+9 config_files/config_9
+10 config_files/config_10
+

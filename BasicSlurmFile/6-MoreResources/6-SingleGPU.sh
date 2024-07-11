@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --qos arc
-#SBATCH --account edmondac-rsg
+#SBATCH --qos FIX_THIS
+#SBATCH --account FIX_THIS
 #SBATCH --time 1:0:0
 #SBATCH --gpus 1
 
