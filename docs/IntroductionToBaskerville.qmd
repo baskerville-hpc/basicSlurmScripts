@@ -141,7 +141,7 @@ For example
 ````{.default}
 scontrol show jobs
 ````
-which persists for a couple of minutes after the job has started.
+which persists for a couple of minutes after the job has finished.
 
 :::
 ::: {.column width="45%"}
@@ -292,4 +292,4 @@ Documented in more detail in the [docs.baskerville.ac.uk](docs.baskerville.ac.uk
 
 See **6-MoreResources** to show loading PyTorch and difference between selecting 1 and more GPUs.
 
-If you want to find out when a job will start (worst case) use **squeue -j=<job ID> --start**
++ Estimated job start time (worst case) use **squeue -j=<job ID> --start**
