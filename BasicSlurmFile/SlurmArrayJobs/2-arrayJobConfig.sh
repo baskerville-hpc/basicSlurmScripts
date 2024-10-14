@@ -8,6 +8,12 @@
 module purge
 module load baskerville
 
+
+# Visit https://baskerville-hpc.github.io/basicSlurmScripts/ for more information
+
+# Slurm Array Example 2 - This is like example 1, but uses $SLURM_ARRAY_TASK_ID to look up a value in a file called config list. This enables a user to work their way through a series of tests in one command.
+
+
 echo "This script is running on $(hostname)"
 echo "SLURM_ARRAY_TASK_ID is ${SLURM_ARRAY_TASK_ID}"
 
