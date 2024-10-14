@@ -186,12 +186,12 @@ job_id = $(sbatch --parsable <slurm file>)
 Job name is used throughout slurm, so change it to something more readable than the script name:
 
 ````{.bash }
-#SBATCH --job-name "AMoreReadableName"
+#SBATCH --job-name "A_More_Readable_Name"
 ````
 
 <br/>
 
-````{.default filename='#SBATCH --job-name "AMoreReadableName"' code-line-numbers="|7"}
+````{.default filename='#SBATCH --job-name "A_More_Readable_Name"' code-line-numbers="|7"}
 [allsoppj@bask-pg0310u18a BasicSlurmFile]$ cat slurm-474832.out
 
 This script is running on bask-pg0308u24a.cluster.baskerville.ac.uk
@@ -232,6 +232,33 @@ Don't try <br>
 
 Use a template slurm file and substitute values into a new script per job with the **sed** bash command .
 
+
+## Change the hardware you want you job to run on
+<br/>
+Baskerville has two types of GPU,
+
++ **A100-40** (default)
++ **A100-80**
+````{.bash}
+#SBATCH --constraint=a100_80
+````
+
+## Change the number of nodes or GPUs
+<br/>
+````{.bash}
+#SBATCH --gpus 3
+#SBATCH --nodes 1
+````
+Documented in more detail in the [docs.baskerville.ac.uk](docs.baskerville.ac.uk){.external target="_blank"}
+
++ Leave **\-\-cpus-per-gpu=36** . Resources such as CPUs and Memory are allocated per GPU.
++ All Compute nodes have 4 GPUs.
++ So adding more than 4 GPUs on a single node will fail.
+
+See **6-MoreResources** to show loading PyTorch and difference between selecting 1 and more GPUs.
+
++ Estimated job start time (worst case) use **squeue -j=<job ID> --start**
+
 ## Slurm Arrays - Run many jobs from one Slurm file
 
 <br>
@@ -267,29 +294,3 @@ See **2-arrayJobConfig.sh ** for information on loading a different config in ea
 
 
 Used this approach to run nearly 700,000 jobs in blocks of 4000, 500 at a time.
-
-## Change the hardware you want you job to run on
-<br/>
-Baskerville has two types of GPU,
-
-+ **A100-40** (default)
-+ **A100-80**
-````{.bash}
-#SBATCH --constraint=a100_80
-````
-
-## Change the number of nodes or GPUs
-<br/>
-````{.bash}
-#SBATCH --gpus 3
-#SBATCH --nodes 1
-````
-Documented in more detail in the [docs.baskerville.ac.uk](docs.baskerville.ac.uk){.external target="_blank"}
-
-+ Leave **\-\-cpus-per-gpu=36** . Resources such as CPUs and Memory are allocated per GPU.
-+ All Compute nodes have 4 GPUs.
-+ So adding more than 4 GPUs on a single node will fail.
-
-See **6-MoreResources** to show loading PyTorch and difference between selecting 1 and more GPUs.
-
-+ Estimated job start time (worst case) use **squeue -j=<job ID> --start**
