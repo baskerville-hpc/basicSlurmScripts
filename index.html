@@ -578,13 +578,13 @@ James Allsopp and the Baskerville Team
 <section id="change-job-name" class="slide level2">
 <h2>Change job name</h2>
 <p>Job name is used throughout slurm, so change it to something more readable than the script name:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="co">#SBATCH --job-name "AMoreReadableName"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="co">#SBATCH --job-name "A_More_Readable_Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>#SBATCH --job-name "AMoreReadableName"</strong></pre>
+<pre><strong>#SBATCH --job-name "A_More_Readable_Name"</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="#SBATCH --job-name &quot;AMoreReadableName&quot;" data-code-line-numbers="|7"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href=""></a>[allsoppj@bask-pg0310u18a BasicSlurmFile]$ cat slurm-474832.out</span>
+<div class="sourceCode" id="cb13" data-filename="#SBATCH --job-name &quot;A_More_Readable_Name&quot;" data-code-line-numbers="|7"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href=""></a>[allsoppj@bask-pg0310u18a BasicSlurmFile]$ cat slurm-474832.out</span>
 <span id="cb13-2"><a href=""></a></span>
 <span id="cb13-3"><a href=""></a>This script is running on bask-pg0308u24a.cluster.baskerville.ac.uk</span>
 <span id="cb13-4"><a href=""></a>[allsoppj@bask-pg0310u18a BasicSlurmFile]$ cat slurm-474832.stats</span>
@@ -614,10 +614,35 @@ James Allsopp and the Baskerville Team
 <p>Don’t try <br> <strong>#SBATCH --output $(pwd)/outputfiles/%A_%a.out</strong> <br></p>
 <p>Use a template slurm file and substitute values into a new script per job with the <strong>sed</strong> bash command .</p>
 </section>
+<section id="change-the-hardware-you-want-you-job-to-run-on" class="slide level2">
+<h2>Change the hardware you want you job to run on</h2>
+<p><br> Baskerville has two types of GPU,</p>
+<ul>
+<li><strong>A100-40</strong> (default)</li>
+<li><strong>A100-80</strong></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="co">#SBATCH --constraint=a100_80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="change-the-number-of-nodes-or-gpus" class="slide level2">
+<h2>Change the number of nodes or GPUs</h2>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co">#SBATCH --gpus 3</span></span>
+<span id="cb16-2"><a href=""></a><span class="co">#SBATCH --nodes 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Documented in more detail in the <a href="docs.baskerville.ac.uk" class="external" target="_blank">docs.baskerville.ac.uk</a></p>
+<ul>
+<li>Leave <strong>--cpus-per-gpu=36</strong> . Resources such as CPUs and Memory are allocated per GPU.</li>
+<li>All Compute nodes have 4 GPUs.</li>
+<li>So adding more than 4 GPUs on a single node will fail.</li>
+</ul>
+<p>See <strong>6-MoreResources</strong> to show loading PyTorch and difference between selecting 1 and more GPUs.</p>
+<ul>
+<li>Estimated job start time (worst case) use <strong>squeue -j=<job id=""> –start</job></strong></li>
+</ul>
+</section>
 <section id="slurm-arrays---run-many-jobs-from-one-slurm-file" class="slide level2">
 <h2>Slurm Arrays - Run many jobs from one Slurm file</h2>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="co">#SBATCH --array=1-10%2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co">#SBATCH --array=1-10%2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Adding this will run the script 10 times with 2 jobs running simultaneously</p>
 <p>Need to use with environment variables to make it useful.</p>
 <ul>
@@ -646,31 +671,6 @@ James Allsopp and the Baskerville Team
 </ul></li>
 </ul>
 <p>Used this approach to run nearly 700,000 jobs in blocks of 4000, 500 at a time.</p>
-</section>
-<section id="change-the-hardware-you-want-you-job-to-run-on" class="slide level2">
-<h2>Change the hardware you want you job to run on</h2>
-<p><br> Baskerville has two types of GPU,</p>
-<ul>
-<li><strong>A100-40</strong> (default)</li>
-<li><strong>A100-80</strong></li>
-</ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co">#SBATCH --constraint=a100_80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="change-the-number-of-nodes-or-gpus" class="slide level2">
-<h2>Change the number of nodes or GPUs</h2>
-<p><br></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co">#SBATCH --gpus 3</span></span>
-<span id="cb17-2"><a href=""></a><span class="co">#SBATCH --nodes 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Documented in more detail in the <a href="docs.baskerville.ac.uk" class="external" target="_blank">docs.baskerville.ac.uk</a></p>
-<ul>
-<li>Leave <strong>--cpus-per-gpu=36</strong> . Resources such as CPUs and Memory are allocated per GPU.</li>
-<li>All Compute nodes have 4 GPUs.</li>
-<li>So adding more than 4 GPUs on a single node will fail.</li>
-</ul>
-<p>See <strong>6-MoreResources</strong> to show loading PyTorch and difference between selecting 1 and more GPUs.</p>
-<ul>
-<li>Estimated job start time (worst case) use <strong>squeue -j=<job id=""> –start</job></strong></li>
-</ul>
 <div class="quarto-auto-generated-content">
 <p><img src="RSG.png" class="slide-logo"></p>
 <div class="footer footer-default">
